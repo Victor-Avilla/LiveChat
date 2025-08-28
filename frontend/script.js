@@ -20,6 +20,28 @@ const colors = [
 ]
 let websocket
 
+const createMessageSelfElement = (message) => {
+    const div = document.createElement("div")
+
+    div.classList.add("message__self")
+    div.innerHTML = message
+    return div
+}
+
+const createMessageOtherElement = (message, sender, senderColor) => {
+    const div = document.createElement("div")
+    const span = document.createElement("span")
+
+    div.classList.add("message__other")
+    span.classList.add("message__other")
+
+    div.appendChild(span)
+
+    span.innerHTML = sender
+    div.innerHTML += message
+    return div
+}
+
 const user = { id: "", name: "", color: "" } /* objeto do usuario */
 
 const getRandomColor = () => {
@@ -28,7 +50,9 @@ const getRandomColor = () => {
 }
 
 const processMessage = ({ data }) => {
-    console.log(data)
+    const { userId, userName, userColor, message } = JSON.parse(data)
+    const element = createMessageOtherElement(message, userName, userColor)
+    chatMessage.appendChild(element)
 }
 
 const handleSubmit = (event) => {
@@ -46,7 +70,15 @@ const handleSubmit = (event) => {
 
 const sendMessage = (event) => {
     event.preventDefault()
-    websocket.send(chatInput.value)
+    const message = {
+        userId: user.id,
+        userName: user.name,
+        userColor: user.color,
+        message: chatInput.value
+    }
+
+    websocket.send(JSON.stringify(message))
+    chatInput.value = ""
 }
 
 
