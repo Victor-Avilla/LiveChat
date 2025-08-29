@@ -33,8 +33,8 @@ const createMessageOtherElement = (message, sender, senderColor) => {
     const span = document.createElement("span")
 
     div.classList.add("message__other")
-    span.classList.add("message__other")
-
+    span.classList.add("message__sender")
+    span.style.color = senderColor;
     div.appendChild(span)
 
     span.innerHTML = sender
@@ -51,8 +51,10 @@ const getRandomColor = () => {
 
 const processMessage = ({ data }) => {
     const { userId, userName, userColor, message } = JSON.parse(data)
-    const element = createMessageOtherElement(message, userName, userColor)
-    chatMessage.appendChild(element)
+
+    const content = userId == user.id ? createMessageSelfElement(message) : createMessageOtherElement(message, userName, userColor)
+
+    chatMessage.appendChild(content)
 }
 
 const handleSubmit = (event) => {

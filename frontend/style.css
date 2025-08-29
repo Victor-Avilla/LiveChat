@@ -132,6 +132,10 @@ body {
     color: #121212;
     border-radius: 10px 10px 0 10px;
     align-self: flex-end;
+
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    white-space: normal;
 }
 
 .message__other{
@@ -139,6 +143,10 @@ body {
     color: #fff;
     border-radius: 10px 10px 10px 0px;
     align-self: flex-start;
+
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    white-space: normal;
 }
 
 .message__sender{
