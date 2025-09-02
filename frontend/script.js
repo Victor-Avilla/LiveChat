@@ -49,12 +49,21 @@ const getRandomColor = () => {
     return colors[randomIndex]
 }
 
+const scroolScreen = () => {
+    window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+    })
+}
+
 const processMessage = ({ data }) => {
     const { userId, userName, userColor, message } = JSON.parse(data)
 
     const content = userId == user.id ? createMessageSelfElement(message) : createMessageOtherElement(message, userName, userColor)
 
     chatMessage.appendChild(content)
+
+    scroolScreen()
 }
 
 const handleSubmit = (event) => {
