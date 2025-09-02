@@ -75,7 +75,7 @@ const handleSubmit = (event) => {
     login.style.display = "none"
     chat.style.display = "flex"
 
-    websocket = new WebSocket("ws://livechat-backend-390p.onrender.com")
+    websocket = new WebSocket("wss://livechat-backend-390p.onrender.com")
     websocket.onmessage = processMessage
 }
 
